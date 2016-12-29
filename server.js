@@ -12,7 +12,7 @@ app.use(bodyParser.text({ type: 'application/graphql' }));
 
 app.post('/graphql', (req, res) => {
   // execute GraphQL!
-  console.log(req.body);
+  console.log('**********req.body', req.body);
 //  graphql(schemaNormal, req.body)
 //  .then((result) => {
 //    res.send(JSON.stringify(result, null, 2));
