@@ -6,7 +6,8 @@
     "new-cap": ["error", { "capIsNew": false }],
     "no-confusing-arrow": ["error", { "allowParens": true }],
     "no-console": ["error", { "allow": ["log", "warn", "error"] }],
-    "no-unused-vars": 0
+    "no-unused-vars": 0,
+    "import/prefer-default-export": 0
   },
   "parserOptions": {
       "ecmaVersion": 6,
