@@ -1,11 +1,9 @@
 import express from 'express';
 import { graphql, buildSchema } from 'graphql';
-import bodyParser from 'body-parser';
+import graphqlHTTP from 'express-graphql';
 
 const app = express();
 const PORT = 3000;
-// parse POST body as text
-app.use(bodyParser.text({ type: 'application/graphql' }));
 
 const schema = buildSchema(`
   type Query {
@@ -17,16 +15,11 @@ export const root = {
   hello: rootValue => `hello, ${rootValue.str}`,
 };
 
-app.post('/graphql', (req, res) => {
-  // execute GraphQL!
-  graphql(schema, req.body, root).then((response) => {
-    res.send(JSON.stringify(response, null, 2));
-  });
-});
+app.use('/graphql', graphqlHTTP({
+  schema,
+  rootValue: root,
+  graphiql: true,
+}));
 
-const server = app.listen(PORT, () => {
-  const host = server.address().address;
-  const port = server.address().port;
-  console.log('GraphQL listening at http://%s:%s', host, port);
-});
+app.listen(4000, () => console.log('Now browse to localhost:4000/graphql'));
 
