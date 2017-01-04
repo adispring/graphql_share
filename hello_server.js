@@ -12,7 +12,9 @@ const schema = buildSchema(`
 `);
 
 export const root = {
-  hello: rootValue => `hello, ${rootValue.str}`,
+  hello: rootValue => Promise.resolve(`hello, ${rootValue.str}`),
+  // hello: rootValue => `hello, ${rootValue.str}`,
+  // hello: rootValue => Promise.reject(`hello, ${rootValue.str}`),
 };
 
 app.use('/graphql', graphqlHTTP({
